@@ -1,0 +1,58 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'grunt@VERSION',
+1 verbose cli   '--save-dev' ]
+2 info using npm@2.7.5
+3 info using node@v0.10.38
+4 verbose node symlink /usr/bin/node
+5 warn package.json browse-track@0.0.0 No repository field.
+6 silly cache add args [ 'grunt@VERSION', null ]
+7 verbose cache add spec grunt@VERSION
+8 silly cache add parsed spec { raw: 'grunt@VERSION',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'grunt',
+8 silly cache add   rawSpec: 'VERSION',
+8 silly cache add   spec: 'VERSION',
+8 silly cache add   type: 'tag' }
+9 verbose addNamed grunt@VERSION
+10 silly addNamed semver.valid null
+11 silly addNamed semver.validRange null
+12 info addNameTag [ 'grunt', 'VERSION' ]
+13 silly mapToRegistry name grunt
+14 silly mapToRegistry using default registry
+15 silly mapToRegistry registry https://registry.npmjs.org/
+16 silly mapToRegistry uri https://registry.npmjs.org/grunt
+17 verbose addNameTag registry:https://registry.npmjs.org/grunt not in flight; fetching
+18 verbose get https://registry.npmjs.org/grunt not expired, no request
+19 silly addNameTag next cb for grunt with tag VERSION
+20 verbose stack Error: No compatible version found: grunt@'VERSION'
+20 verbose stack Valid install targets:
+20 verbose stack ["0.1.0","0.1.1","0.1.2","0.2.0","0.2.1","0.2.2","0.2.3","0.2.4","0.2.5","0.2.6","0.2.7","0.2.8","0.2.9","0.2.10","0.2.11","0.2.12","0.2.13","0.2.14","0.2.15","0.3.0","0.3.1","0.3.2","0.3.3","0.3.4","0.3.5","0.3.6","0.3.7","0.3.8","0.3.9","0.3.10","0.3.11","0.3.12","0.3.13","0.3.14","0.3.15","0.3.16","0.3.17","0.4.0","0.4.1","0.4.2","0.4.3","0.4.4","0.4.5","0.3.13-a","0.4.0-a","0.4.0-rc1","0.4.0-rc2","0.4.0-rc3","0.4.0-rc4","0.4.0-rc5","0.4.0-rc6","0.4.0-rc7","0.4.0-rc8"]
+20 verbose stack
+20 verbose stack     at installTargetsError (/usr/lib/node_modules/npm/lib/cache/add-named.js:259:12)
+20 verbose stack     at next (/usr/lib/node_modules/npm/lib/cache/add-named.js:79:10)
+20 verbose stack     at RES (/usr/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+20 verbose stack     at f (/usr/lib/node_modules/npm/node_modules/once/once.js:17:25)
+20 verbose stack     at CachingRegistryClient.get_ (/usr/lib/node_modules/npm/lib/cache/caching-client.js:125:16)
+20 verbose stack     at /usr/lib/node_modules/npm/lib/cache/caching-client.js:91:14
+20 verbose stack     at evalmachine.<anonymous>:272:14
+20 verbose stack     at /usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:102:5
+20 verbose stack     at Object.oncomplete (evalmachine.<anonymous>:108:15)
+21 verbose cwd /home/madiyar/Documents/HW/browse-track
+22 error Linux 3.13.0-32-generic
+23 error argv "node" "/usr/bin/npm" "install" "grunt@VERSION" "--save-dev"
+24 error node v0.10.38
+25 error npm  v2.7.5
+26 error code ETARGET
+27 error notarget No compatible version found: grunt@'VERSION'
+27 error notarget Valid install targets:
+27 error notarget ["0.1.0","0.1.1","0.1.2","0.2.0","0.2.1","0.2.2","0.2.3","0.2.4","0.2.5","0.2.6","0.2.7","0.2.8","0.2.9","0.2.10","0.2.11","0.2.12","0.2.13","0.2.14","0.2.15","0.3.0","0.3.1","0.3.2","0.3.3","0.3.4","0.3.5","0.3.6","0.3.7","0.3.8","0.3.9","0.3.10","0.3.11","0.3.12","0.3.13","0.3.14","0.3.15","0.3.16","0.3.17","0.4.0","0.4.1","0.4.2","0.4.3","0.4.4","0.4.5","0.3.13-a","0.4.0-a","0.4.0-rc1","0.4.0-rc2","0.4.0-rc3","0.4.0-rc4","0.4.0-rc5","0.4.0-rc6","0.4.0-rc7","0.4.0-rc8"]
+27 error notarget
+27 error notarget This is most likely not a problem with npm itself.
+27 error notarget In most cases you or one of your dependencies are requesting
+27 error notarget a package version that doesn't exist.
+27 error notarget
+27 error notarget It was specified as a dependency of 'browse-track'
+28 verbose exit [ 1, true ]

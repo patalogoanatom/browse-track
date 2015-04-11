@@ -3,12 +3,18 @@
 chrome.runtime.onInstalled.addListener (details) ->
   console.log('previousVersion', details.previousVersion)
 
-chrome.browserAction.setBadgeText({text: '+15'})
+chrome.browserAction.setBadgeText({text: 0.toString()})
 
 Stat =
   data: {}
   cur: null
 
+chrome.storage.sync.get 'browser-track.data', (item) ->
+  if item['browser-track.data']
+    console.log "STORAGE"
+    console.log JSON.parse(item['browser-track.data'])
+    Stat.data = JSON.parse(item['browser-track.data'])
+  
 tabChanged = (url) ->
   if Stat.cur
     lst = Stat.data[Stat.cur]
@@ -19,28 +25,33 @@ tabChanged = (url) ->
   Stat.data[url] = lst
 
 calc = (url)->
-  lst = Stat.data[url]
+  lst =  Stat.data[url]
   if not lst
     return 0
   n = Math.floor (lst.length / 2)
   res = 0
   for i in [0..n]
     if lst[2 * i + 1] and lst[2 * i]
-      res += lst[2 * i + 1].getTime() - lst[2 * i].getTime()
+      res += new Date(lst[2 * i + 1]).getTime() - new Date(lst[2 * i]).getTime()
   res += (new Date()).getTime() - lst[lst.length - 1].getTime()
   return res
 
 updateBadge = (url)->
   res = calc url
-  chrome.browserAction.setBadgeText({text: "#{res / 1000}"})
+  chrome.browserAction.setBadgeText({text: res.toString()})
 
 
 chrome.tabs.onActivated.addListener (activeInfo)->
   console.log "Select #{activeInfo.tabId} "
   Stat.curTabId = activeInfo.tabId
   chrome.tabs.get activeInfo.tabId, (tab) ->
-    tabChanged(tab.url) if tab.url
-    updateBadge tab.url
+    if tab.url
+      url = new URL(tab.url)
+      if url.protocol == 'https:' || url.protocol == 'http:'
+        tabChanged url.hostname
+        updateBadge url.hostname
+      else
+        chrome.browserAction.setBadgeText({text: ""})
 
 chrome.alarms.onAlarm.addListener (alarm)->
   console.log alarm, Stat.curTabId
@@ -48,9 +59,15 @@ chrome.alarms.onAlarm.addListener (alarm)->
     if not Stat.curTabId
       return
     chrome.tabs.get Stat.curTabId, (tab)->
-      console.log tab
       if tab.url
-        updateBadge tab.url
+        url = new URL(tab.url)
+        if url.protocol == 'https:' || url.protocol == 'http:'
+          updateBadge url.hostname
+    chrome.storage.sync.set {'browser-track.data': JSON.stringify(Stat.data)}
 
-chrome.alarms.create("update", {periodInMinutes: 0.1})
-console.log('\'Allo \'Allo! Event Page for Browser Action')
+chrome.alarms.create("update", {periodInMinutes: 0.0166})
+console.log('\'Allo \'USER! Made by Madik Event Page for Browser Action')
+
+
+chrome.runtime.onInstalled.addListener (details) ->
+  console.log 'previousVersion', details.previousVersion
