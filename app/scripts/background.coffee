@@ -5,6 +5,20 @@ chrome.runtime.onInstalled.addListener (details) ->
 
 chrome.browserAction.setBadgeText({text: 0.toString()})
 
+msToTime = (s) ->
+  ms = s % 1000
+
+  addZ = (n) ->
+    (if n < 10 then '0' else '') + n
+
+  s = (s - ms) / 1000
+  secs = s % 60
+  s = (s - secs) / 60
+  mins = s % 60
+  hrs = (s - mins) / 60
+  addZ(hrs) + ':' + addZ(mins) + ':' + addZ(secs) + '.' + ms
+
+
 Stat =
   data: {}
   cur: null
@@ -38,7 +52,7 @@ calc = (url)->
 
 updateBadge = (url)->
   res = calc url
-  chrome.browserAction.setBadgeText({text: res.toString()})
+  chrome.browserAction.setBadgeText({text: msToTime(res)})
 
 
 chrome.tabs.onActivated.addListener (activeInfo)->
